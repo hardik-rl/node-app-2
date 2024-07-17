@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+
+  <body>
+    <header>
+      <%- include('../partials/navbar'); %>
+    </header>
+    <div class="w-50 ms-4 mb-4">
+      <h3 class="my-3">Get All Users List</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (getAllUsers && getAllUsers.length) { %>
+            <% getAllUsers.forEach(function(user) { %>
+              <tr id="user-<%= user._id %>">
+                <td><%= user.firstName %></td>
+                <td><%= user.lastName %></td>
+
+                <td><%= user.email %></td>
+                <td><%= user.gender %></td>
+                <td class="d-flex">
+                  <button type="submit" onclick="deleteUser('<%= user._id %>')" class="bg-transparent border-0 btn btn-sm underline text-primary">Edit</button>
+                  <button type="submit" onclick="deleteUser('<%= user._id %>')" class="bg-transparent border-0 btn btn-sm underline text-danger">Delete</button>
+                </td>
+              </tr>
+            <% }); %>
+          <% } else { %>
+            <tr>
+              <td colspan="4" class="text-center text-danger">No users found.</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+
+    </div>
+    <%- include('../partials/footer'); %>
+    <script>
+      async function deleteUser(userId) {
+        try {
+          const response = await fetch(`/users/${userId}`, {
+            method: 'DELETE'
+          });
+          if (response.ok) {
+            document.getElementById(`user-${userId}`).remove();
+          } else {
+            alert('Error deleting user');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('Error deleting user');
+        }
+      }
+    </script>
+  </body>
+
+</html>

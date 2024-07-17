@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+
+  <body>
+    <header>
+      <%- include('../partials/navbar'); %>
+    </header>
+
+    <div class="ms-4">
+      <h2 class="m-3">Add Users</h2>
+      <div class="card m-3" style="width: 18rem;">
+        <form action="/users/add" method="POST" class="card-body">
+          <div class="mb-3">
+            <label class="form-label" for="first_name">First Name:</label>
+            <input class="form-control" type="text" id="first_name" name="first_name" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="last_name">Last Name:</label>
+            <input class="form-control" type="text" id="last_name" name="last_name" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="email">Email:</label>
+            <input class="form-control" type="email" id="email" name="email" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="gender">Gender:</label>
+            <select class="form-control" id="gender" name="gender" required>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" type="submit">Add User</button>
+        </form>
+      </div>
+    </div>
+
+    <%- include('../partials/footer'); %>
+  </body>
+
+</html>
